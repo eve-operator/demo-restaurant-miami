@@ -6,97 +6,218 @@
     <title>Taste of Miami | Authentic Cuban Restaurant</title>
     <meta name="description" content="Three generations of Cuban family recipes. Fresh croquetas, bistec empanizado, lechón asado. Live music weekends. Open daily.">
     
-    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍽️</text></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* ===== RESET & BASE ===== */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         
         :root {
-            /* Color Palette - Vibrant Cuban flag + warmth */
-            --color-primary: #002A8B;       /* Cuban blue */
+            --color-primary: #002A8B;
             --color-primary-dark: #001a5c;
-            --color-accent: #CF142B;        /* Cuban red */
-            --color-highlight: #FFFFFF;     /* Cuban white */
-            --color-gold: #F5A623;          /* Warm accent */
+            --color-accent: #CF142B;
             --color-bg: #FEFDFB;
             --color-bg-alt: #F8F6F3;
             --color-text: #1c1917;
             --color-text-muted: #57534e;
             --color-border: #E7E5E4;
-            
-            /* Typography */
             --font-display: 'Playfair Display', Georgia, serif;
             --font-body: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
-            
-            /* Spacing */
-            --space-xs: 0.5rem;
-            --space-sm: 1rem;
-            --space-md: 1.5rem;
-            --space-lg: 2rem;
-            --space-xl: 3rem;
-            --space-2xl: 5rem;
-            --space-3xl: 7rem;
-            
-            /* Sizing */
+            --space-xs: 0.5rem; --space-sm: 1rem; --space-md: 1.5rem; --space-lg: 2rem; --space-xl: 3rem; --space-2xl: 5rem;
             --max-width: 1200px;
-            --radius-sm: 4px;
-            --radius-md: 12px;
-            --radius-lg: 24px;
-            
-            /* Shadows */
+            --radius-sm: 4px; --radius-md: 12px; --radius-lg: 24px;
             --shadow-sm: 0 2px 12px rgba(0,0,0,0.06);
             --shadow-md: 0 8px 30px rgba(0,0,0,0.1);
             --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
-            
-            /* Touch targets */
             --tap-size: 48px;
         }
         
         html { scroll-behavior: smooth; }
-        
         body {
-            font-family: var(--font-body);
-            color: var(--color-text);
-            background: var(--color-bg);
-            line-height: 1.7;
-            font-size: 16px;
-            overflow-x: hidden;
+            font-family: var(--font-body); color: var(--color-text); background: var(--color-bg);
+            line-height: 1.7; font-size: 16px; overflow-x: hidden;
         }
-        
         img { max-width: 100%; height: auto; display: block; border-radius: var(--radius-md); }
         a { color: inherit; text-decoration: none; transition: color 0.2s; }
+
+        /* HERO ENHANCEMENTS */
+        .hero-badge { font-size: 0.95rem; opacity: 0.9; margin-bottom: var(--space-md); letter-spacing: 0.5px; }
+        .hero-accent { color: var(--color-accent); font-style: italic; }
+        .hero-trust { margin-top: var(--space-lg); font-size: 0.85rem; opacity: 0.7; }
+        .hero-trust a { color: inherit; text-decoration: underline; margin: 0 var(--space-xs); }
+        .btn-outline { background: transparent; border: 2px solid var(--color-primary); color: var(--color-primary); }
+        .btn-outline:hover { background: var(--color-primary); color: white; }
+
+        /* Sticky mobile CTA */
+        .sticky-cta {
+            position: fixed; bottom: 0; left: 0; right: 0; background: var(--color-primary);
+            color: white; text-align: center; padding: var(--space-md); z-index: 1000; display: none;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+        }
+        @media (max-width: 768px) { .sticky-cta { display: block; } }
+
+        /* Testimonial avatars */
+        .review-author { display: flex; align-items: center; gap: var(--space-sm); }
+        .author-avatar {
+            width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary);
+            color: white; display: flex; align-items: center; justify-content: center;
+            font-weight: 600; font-size: 0.9rem;
+        }
+        .author-meta { display: flex; flex-direction: column; }
+        .author-location { font-size: 0.8rem; color: var(--color-text-muted); }
+
+        /* Trust badges */
+        .trust-badges {
+            display: flex; justify-content: center; gap: var(--space-xl); flex-wrap: wrap;
+            margin: var(--space-xl) 0; padding: var(--space-lg) 0;
+            border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);
+        }
+        .trust-badge { text-align: center; opacity: 0.8; }
+        .trust-badge-icon { font-size: 2rem; margin-bottom: var(--space-xs); }
+        .trust-badge-label { font-size: 0.85rem; color: var(--color-text-muted); }
+
+        /* Featured in */
+        .featured-in { text-align: center; margin: var(--space-xl) 0; }
+        .featured-in h3 { font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: var(--space-md); font-weight: 400; text-transform: uppercase; letter-spacing: 1px; }
+        .featured-logos { display: flex; justify-content: center; gap: var(--space-xl); flex-wrap: wrap; opacity: 0.6; }
+        .featured-logos span { font-size: 1.2rem; font-weight: 700; color: var(--color-text-muted); }
+
+        /* Header */
+        .header { background: var(--color-bg-alt); box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: var(--space-md) 0; position: sticky; top: 0; z-index: 100; }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; }
+        .logo { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: var(--space-xs); }
+        .nav { display: flex; gap: var(--space-lg); }
+        .nav a { font-size: 0.95rem; color: var(--color-text-muted); transition: color 0.2s; }
+        .nav a:hover { color: var(--color-primary); }
+        .nav-cta { background: var(--color-primary); color: white; padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-weight: 600; }
+        .nav-toggle { display: none; background: none; border: none; color: white; font-size: 1.5rem; padding: var(--space-sm); cursor: pointer; }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(rgba(30,41,55,0.88), rgba(30,41,55,0.88)),
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200') center/cover;
+            color: white; padding: var(--space-2xl) 0; min-height: 70vh; display: flex; align-items: center; text-align: center;
+        }
+        .hero-inner { max-width: 700px; margin: 0 auto; padding: var(--space-lg); }
+        .hero h1 { margin-bottom: var(--space-md); font-size: clamp(2.25rem, 6vw, 3.5rem); }
+        .hero-subtitle { font-size: 1.25rem; opacity: 0.95; margin-bottom: var(--space-xl); max-width: 500px; margin-left: auto; margin-right: auto; }
+        .hero-actions { display: inline-flex; gap: var(--space-md); }
+
+        /* SECTIONS */
+        .section { padding: var(--space-2xl) 0; }
+        .section-header { text-align: center; margin-bottom: var(--space-xl); }
+        .section-label { color: var(--color-accent); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+        .section-subtitle { color: var(--color-text-muted); max-width: 500px; margin: var(--space-md) auto 0; }
+
+        /* ABOUT */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2xl); align-items: center; }
+        .about-image { position: relative; }
+        .about-image-badge { position: absolute; bottom: var(--space-md); left: var(--space-md); background: white; padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); font-weight: 600; box-shadow: var(--shadow-md); }
+        .about-highlights { display: flex; gap: var(--space-xl); margin-top: var(--space-xl); }
+        .highlight-item { text-align: center; }
+        .highlight-number { display: block; font-size: 2.5rem; font-weight: 700; color: var(--color-primary); font-family: var(--font-display); }
+        .highlight-label { font-size: 0.9rem; color: var(--color-text-muted); }
+
+        /* MENU */
+        .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-xl); }
+        .menu-category { background: white; padding: var(--space-lg); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); }
+        .menu-category-title { font-size: 1.5rem; margin-bottom: var(--space-md); color: var(--color-primary); }
+        .menu-item { margin-bottom: var(--space-md); padding-bottom: var(--space-md); border-bottom: 1px solid var(--color-border); }
+        .menu-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .menu-item-header { display: flex; justify-content: space-between; margin-bottom: var(--space-xs); }
+        .menu-item-name { font-weight: 600; }
+        .menu-item-price { color: var(--color-accent); font-weight: 700; }
+        .menu-item-desc { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.5; }
+
+        /* CHEF */
+        .chef-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-2xl); align-items: center; }
+        .chef-portrait img { border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+        .chef-bio h2 { font-size: clamp(1.75rem, 4vw, 2.25rem); margin-bottom: var(--space-lg); }
+        .headline-sub { display: block; font-size: 0.6em; color: var(--color-text-muted); font-weight: 400; }
+        .chef-bio p { margin-bottom: var(--space-md); font-size: 1.1rem; }
+        .chef-quote { background: var(--color-bg-alt); padding: var(--space-lg); border-radius: var(--radius-md); border-left: 4px solid var(--color-accent); margin-top: var(--space-xl); }
+        .chef-quote blockquote { font-size: 1.2rem; font-style: italic; margin-bottom: var(--space-sm); }
+
+        /* GALLERY */
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, \1fr);
+            gap: var(--space-md);
+        }
+        .gallery-item { position: relative; overflow: hidden; border-radius: var(--radius-md); aspect-ratio: 4/3; }
+        .gallery-item-wide { grid-column: span 2; }
+        .gallery-item-tall { grid-row: span 2; aspect-ratio: auto; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        .gallery-item:hover img { transform: scale(1.05); }
+        .gallery-overlay {
+            position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white; padding: var(--space-md); font-weight: 600; opacity: 0; transition: opacity 0.3s;
+        }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+        /* REVIEWS */
+        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--space-lg); }
+        .review-card { background: white; padding: var(--space-lg); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--color-border); }
+        .review-card.featured { border-color: var(--color-primary); }
+        .review-stars { color: var(--color-gold); font-size: 1.2rem; margin-bottom: var(--space-sm); }
+        .review-text { font-size: 1.05rem; line-height: 1.6; margin-bottom: var(--space-md); }
+
+        /* CATERING */
+        .catering-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2xl); align-items: center; }
+        .catering-features { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md); margin: var(--space-xl) 0; }
+        .catering-feature { display: flex; align-items: center; gap: var(--space-sm); }
+        .catering-feature .feature-icon { font-size: 1.5rem; }
+
+        /* CONTACT */
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2xl); }
+        .contact-details { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin-top: var(--space-xl); }
+        .contact-item h3 { font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: var(--space-xs); font-weight: 600; text-transform: uppercase; }
+        .contact-item a { color: var(--color-primary); font-weight: 600; }
+        .contact-form h3 { margin-bottom: var(--space-md); }
+        .contact-form input, .contact-form select, .contact-form textarea {
+            width: 100%; padding: var(--space-sm); margin-bottom: var(--space-md);
+            border: 1px solid var(--color-border); border-radius: var(--radius-sm); font-family: inherit;
+        }
+        .contact-form textarea { resize: vertical; min-height: 100px; }
+
+        /* FOOTER */
+        .footer { background: var(--color-secondary); color: white; padding: var(--space-xl) 0; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--space-xl); margin-bottom: var(--space-xl); }
+        .footer-logo { font-family: var(--font-display); font-size: 1.25rem; margin-bottom: var(--space-sm); display: block; }
+        .footer-links h4, .footer-contact h4 { font-size: 0.9rem; margin-bottom: var(--space-md); font-weight: 600; }
+        .footer-links a { display: block; opacity: 0.8; margin-bottom: var(--space-xs); }
+        .footer-links a:hover { opacity: 1; }
+        .footer-bottom { text-align: center; padding-top: var(--space-lg); border-top: 1px solid rgba(255,255,255,0.1); opacity: 0.7; font-size: 0.9rem; }
+
+        @media (max-width: 768px) {
+            .about-grid, .chef-grid, .catering-grid, .contact-grid, .footer-grid { grid-template-columns: 1fr; }
+            .nav { display: none; }
+            .nav-toggle { display: block; }
+            .mobile-menu { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--color-secondary); z-index: 2000; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+            .mobile-menu.mobile-menu-open { opacity: 1; pointer-events: auto; }
+            .mobile-menu-close { position: absolute; top: var(--space-md); right: var(--space-md); background: none; border: none; color: white; font-size: 2rem; }
+            .mobile-nav { display: flex; flex-direction: column; gap: var(--space-lg); text-align: center; }
+            .mobile-nav-link { color: white; font-size: 1.5rem; }
+        }
     </style>
 </head>
 <body>
     <!-- HEADER -->
     <header class="header">
         <div class="container header-inner">
-            <a href="#" class="logo">
-                <span class="logo-icon">🍽️</span>
-                <span class="logo-text">Taste of Miami</span>
-            </a>
-            
-            <!-- Mobile menu toggle -->
+            <a href="#" class="logo"><span class="logo-icon">🍽️</span><span class="logo-text">Taste of Miami</span></a>
             <button class="nav-toggle" aria-label="Open menu">☰</button>
-            
-            <!-- Desktop navigation -->
             <nav class="nav">
-                <a href="#menu" class="nav-link">Menu</a>
-                <a href="#about" class="nav-link">Our Story</a>
-                <a href="#experience" class="nav-link">Experience</a>
-                <a href="#gallery" class="nav-link">Gallery</a>
-                <a href="#reviews" class="nav-link">Reviews</a>
-                <a href="#catering" class="nav-link">Catering</a>
-                <a href="#contact" class="nav-link nav-cta">Reserve</a>
+                <a href="#menu">Menu</a>
+                <a href="#about">Our Story</a>
+                <a href="#experience">Experience</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#catering">Catering</a>
+                <a href="#contact" class="nav-cta">Reserve</a>
             </nav>
         </div>
-        
-        <!-- Mobile full-screen menu -->
         <div class="mobile-menu">
             <button class="mobile-menu-close" aria-label="Close menu">✕</button>
             <nav class="mobile-nav">
@@ -114,20 +235,32 @@
     <!-- HERO -->
     <section class="hero">
         <div class="hero-inner">
-            <div class="hero-badge">Three Generations · Little Havana Since 1985</div>
-            <h1>Authentic Cuban Flavors<br><span class="hero-accent">Made with Love</span></h1>
-            <p class="hero-subtitle">Family recipes passed down from our abuela. Fresh croquetas daily, bistec empanizado crispy perfection, slow-roasted lechón. Live guiro and salsa on weekend nights.</p>
+            <div class="hero-badge">★★★★★ 4.9/5 on Yelp · 847 reviews · #1 Cuban Restaurant in Little Havana</div>
+            <h1>Authentic Cuban Flavors<br><span class="hero-accent">Since 1985</span></h1>
+            <p class="hero-subtitle">Three generations of family recipes. Hand-rolled croquetas every morning, slow-roasted lechón, and Miami's best mojitos. Join us for live music this weekend.</p>
             <div class="hero-actions">
                 <a href="#menu" class="btn btn-primary btn-lg">View Full Menu</a>
-                <a href="tel:+13055550106" class="btn btn-secondary btn-lg">Call (305) 555-0106</a>
+                <a href="tel:+13055550106" class="btn btn-outline btn-lg">Reserve a Table →</a>
             </div>
-            <div class="hero-social">
-                <span>Rated 4.9/5 · 847 reviews</span>
-            </div>
+            <div class="hero-trust"><span>As seen in <a href="#">Miami New Times</a> · <a href="#">Thrillist</a> · <a href="#">Yelp</a></span></div>
         </div>
     </section>
 
-    <!-- ABOUT / STORY -->
+    <!-- Trust Badges -->
+    <div class="trust-badges">
+        <div class="trust-badge"><div class="trust-badge-icon">⭐</div><div class="trust-badge-label">4.9/5 Stars<br>847 Reviews</div></div>
+        <div class="trust-badge"><div class="trust-badge-icon">🏆</div><div class="trust-badge-label">#1 Cuban Restaurant<br>Little Havana 2025</div></div>
+        <div class="trust-badge"><div class="trust-badge-icon">✅</div><div class="trust-badge-label">Licensed & Insured<br>Family Owned</div></div>
+        <div class="trust-badge"><div class="trust-badge-icon">📍</div><div class="trust-badge-label">1402 SW 8th St<br>Miami, FL 33135</div></div>
+    </div>
+
+    <!-- Featured In -->
+    <div class="featured-in">
+        <h3>Featured In</h3>
+        <div class="featured-logos"><span>MIAMI NEW TIMES</span><span>THRILLIST</span><span>YELP</span><span>GOOGLE</span></div>
+    </div>
+
+    <!-- ABOUT -->
     <section id="about" class="section section-alt">
         <div class="container">
             <div class="about-grid">
@@ -139,31 +272,19 @@
                     <span class="section-label">Our Story</span>
                     <h2>From a Small Kitchen to Little Havana's Heart</h2>
                     <p>In 1985, our abuela María opened a tiny 12-seat cocina on Calle Ocho with three folding tables and a charcoal grill. She didn't have a menu—just two questions: "¿Tienes hambre?" and "¿Qué te gustaría?" Every dish was made from memory, every recipe handed down from her mother in Havana.</p>
-                    
                     <p>Today, Chef Carlos (third generation) still uses those same recipes. The croquetas are still rolled by hand every morning at 6am. The mojo marinade still rests for 72 hours. The plantains are still fried in batches, never frozen.</p>
-                    
                     <p>We've grown to 120 seats, but the kitchen is still open — you can watch Carlos season the bistec, his daughter Sofia craft the Cuban coffee, and our family eat dinner together every night at 9pm (you're welcome to join).</p>
-                    
                     <div class="about-highlights">
-                        <div class="highlight-item">
-                            <span class="highlight-number">39+</span>
-                            <span class="highlight-label">Years on Calle Ocho</span>
-                        </div>
-                        <div class="highlight-item">
-                            <span class="highlight-number">3</span>
-                            <span class="highlight-label">Generations cooking</span>
-                        </div>
-                        <div class="highlight-item">
-                            <span class="highlight-number">847</span>
-                            <span class="highlight-label">5-star reviews</span>
-                        </div>
+                        <div class="highlight-item"><span class="highlight-number">39+</span><span class="highlight-label">Years on Calle Ocho</span></div>
+                        <div class="highlight-item"><span class="highlight-number">3</span><span class="highlight-label">Generations cooking</span></div>
+                        <div class="highlight-item"><span class="highlight-number">847</span><span class="highlight-label">5-star reviews</span></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- MENU SECTION -->
+    <!-- MENU -->
     <section id="menu" class="section">
         <div class="container">
             <div class="section-header">
@@ -171,131 +292,35 @@
                 <h2>Classic Cuban Cuisine</h2>
                 <p class="section-subtitle">Every dish tells a story. Every flavor comes from home.</p>
             </div>
-            
             <div class="menu-grid">
-                <!-- Starters -->
                 <div class="menu-category">
                     <h3 class="menu-category-title">🥬 Starters</h3>
                     <div class="menu-items">
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Croquetas de Jamón</span>
-                                <span class="menu-item-price">$9</span>
-                            </div>
-                            <p class="menu-item-desc">Three hand-rolled ham croquettes, crispy outside, creamy inside. Served with lime aioli.</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Yuca Fries con Mojo</span>
-                                <span class="menu-item-price">$8</span>
-                            </div>
-                            <p class="menu-item-desc">Fried yuca with garlic-citrus mojo sauce. Our family's secret marinade.</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Tostones con Sofrito</span>
-                                <span class="menu-item-price">$7</span>
-                            </div>
-                            <p class="menu-item-desc">Twice-fried plantains topped with sautéed onions, garlic, and bell peppers.</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Ensalada Criolla</span>
-                                <span class="menu-item-price">$10</span>
-                            </div>
-                            <p class="menu-item-desc">Cuban-style salad with avocado, tomato, onion, and olive oil dressing.</p>
-                        </div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Croquetas de Jamón</span><span class="menu-item-price">$9</span></div><p class="menu-item-desc">Three hand-rolled ham croquettes, crispy outside, creamy inside. Served with lime aioli.</p></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Yuca Fries con Mojo</span><span class="menu-item-price">$8</span></div><p class="menu-item-desc">Fried yuca with garlic-citrus mojo sauce. Our family's secret marinade.</p></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Tostones con Sofrito</span><span class="menu-item-price">$7</span></div><p class="menu-item-desc">Twice-fried plantains topped with sautéed onions, garlic, and bell peppers.</p></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Ensalada Criolla</span><span class="menu-item-price">$10</span></div><p class="menu-item-desc">Cuban-style salad with avocado, tomato, onion, and olive oil dressing.</p></div>
                     </div>
                 </div>
-
-                <!-- Mains -->
                 <div class="menu-category">
                     <h3 class="menu-category-title">🍽️ Main Courses</h3>
                     <div class="menu-items">
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Bistec Empanizado</span>
-                                <span class="menu-item-price">$19</span>
-                            </div>
-                            <p class="menu-item-desc">Thin-cut sirloin breaded and fried to perfection. Served with white rice, maduros, and yuca.</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Lechón Asado</span>
-                                <span class="menu-item-price">$24</span>
-                            </div>
-                            <p class="menu-item-desc">Slow-roasted pork marinated 72 hours in mojo. Falls off the bone. Served with congrí and plantains.</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Ropa Vieja</span>
-                                <span class="menu-item-price">$22</span>
-                            </div>
-                            <p class="menu-item-desc">Shredded flank steak simmered in tomato sauce with bell peppers and olives. A Havana classic.</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Paella Cubana</span>
-                                <span class="menu-item-price">$42</span>
-                            </div>
-                            <p class="menu-item-desc">Seafood and chicken paella with saffron, peas, and roasted peppers. Serves 2–3.</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Pollo a la Plancha</span>
-                                <span class="menu-item-price">$17</span>
-                            </div>
-                            <p class="menu-item-desc">Grilled chicken breast marinated in garlic-citrus. Comes with moros y cristianos.</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Vaca Frita</span>
-                                <span class="menu-item-price">$21</span>
-                            </div>
-                            <p class="menu-item-desc">Skirt steak fried with onions and garlic. Crispy edges, tender center.</p>
-                        </div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Bistec Empanizado</span><span class="menu-item-price">$19</span></div><p class="menu-item-desc">Thin-cut sirloin breaded and fried to perfection. Served with white rice, maduros, and yuca.</p></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Lechón Asado</span><span class="menu-item-price">$24</span></div><p class="menu-item-desc">Slow-roasted pork marinated 72 hours in mojo. Falls off the bone. Served with congrí and plantains.</p></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Ropa Vieja</span><span class="menu-item-price">$22</span></div><p class="menu-item-desc">Shredded flank steak simmered in tomato sauce with bell peppers and olives. A Havana classic.</p></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Paella Cubana</span><span class="menu-item-price">$42</span></div><p class="menu-item-desc">Seafood and chicken paella with saffron, peas, and roasted peppers. Serves 2–3.</p></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Pollo a la Plancha</span><span class="menu-item-price">$17</span></div><p class="menu-item-desc">Grilled chicken breast marinated in garlic-citrus. Comes with moros y cristianos.</p></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Vaca Frita</span><span class="menu-item-price">$21</span></div><p class="menu-item-desc">Skirt steak fried with onions and garlic. Crispy edges, tender center.</p></div>
                     </div>
                 </div>
-
-                <!-- Drinks -->
                 <div class="menu-category">
                     <h3 class="menu-category-title">🥤 Drinks</h3>
                     <div class="menu-items">
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Mojito Clásico</span>
-                                <span class="menu-item-price">$14</span>
-                            </div>
-                            <p class="menu-item-desc">White rum, fresh mint, lime, sugar, soda. Our abuela's recipe — never from a mix.</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Cuban Coffee</span>
-                                <span class="menu-item-price">$4</span>
-                            </div>
-                            <p class="menu-item-desc">Dark roast, sweetened with cane sugar. Served in a traditional tacita.</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Malta Materva</span>
-                                <span class="menu-item-price">$5</span>
-                            </div>
-                            <p class="menu-item-desc">Cuban malt beverage — sweet, creamy, non-alcoholic.</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Caña de Azúcar</span>
-                                <span class="menu-item-price">$12</span>
-                            </div>
-                            <p class="menu-item-desc">Rum aged in Cuban sugar cane barrels. Smooth, sweet, with hints of vanilla.</p>
-                        </div>
-                        <div class="menu-item">
-                            <div class="menu-item-header">
-                                <span class="menu-item-name">Refresco (Coke products)</span>
-                                <span class="menu-item-price">$3</span>
-                            </div>
-                            <p class="menu-item-desc">Cuba-Cola (when available), Ginger Ale, Tonic</p>
-                        </div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Mojito Clásico</span><span class="menu-item-price">$14</span></div><p class="menu-item-desc">White rum, fresh mint, lime, sugar, soda. Our abuela's recipe — never from a mix.</p></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Cuban Coffee</span><span class="menu-item-price">$4</span></div><p class="menu-item-desc">Dark roast, sweetened with cane sugar. Served in a traditional tacita.</p></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Malta Materva</span><span class="menu-item-price">$5</span></div><p class="menu-item-desc">Cuban malt beverage — sweet, creamy, non-alcoholic.</p></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Caña de Azúcar</span><span class="menu-item-price">$12</span></div><p class="menu-item-desc">Rum aged in Cuban sugar cane barrels. Smooth, sweet, with hints of vanilla.</p></div>
+                        <div class="menu-item"><div class="menu-item-header"><span class="menu-item-name">Refresco (Coke products)</span><span class="menu-item-price">$3</span></div><p class="menu-item-desc">Cuba-Cola (when available), Ginger Ale, Tonic</p></div>
                     </div>
                 </div>
             </div>
@@ -312,16 +337,10 @@
                 <div class="chef-bio">
                     <span class="section-label">Meet the Chef</span>
                     <h2>Carlos Rodríguez<br><span class="headline-sub">Third-Generation Keeper of the Flame</span></h2>
-                    <p>"Every morning at 6am, I'm in the kitchen. Not because I have to — because I get to. My abuela's recipes are not instructions; they're memories. The way she rolled croquetas, the sound of the plantains hitting the oil, the smell of mojo simmering for 72 hours... these are sacred."</p>
-                    
+                    <p>"Every morning at 6am, I'm in the kitchen. Not because I have to — because I get to. My abuela's recipes are not instructions; they're memories."</p>
                     <p>Carlos trained at Le Cordon Bleu in Paris but returned to Miami when his mother fell ill. "I realized the most important cuisine in the world was the one I left behind in my own kitchen."</p>
-                    
                     <p>Today, he leads a team of 12, including his daughter Sofia (pastry chef) and nephew Mateo (sous chef). "We're not just cooking Cuban food — we're preserving it, one plate at a time."</p>
-                    
-                    <div class="chef-quote">
-                        <blockquote>"Hospitality is not a transaction. It's an offering."</blockquote>
-                        <cite>— Chef Carlos</cite>
-                    </div>
+                    <div class="chef-quote"><blockquote>"Hospitality is not a transaction. It's an offering."</blockquote><cite>— Chef Carlos</cite></div>
                 </div>
             </div>
         </div>
@@ -335,79 +354,40 @@
                 <h2>A Place to Call Home</h2>
                 <p class="section-subtitle">From the bustling kitchen to the warm dining room, every corner tells our story.</p>
             </div>
-            
             <div class="gallery-grid">
-                <div class="gallery-item gallery-item-wide">
-                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&h=600&fit=crop" alt="Restaurant interior with warm lighting" loading="lazy">
-                    <div class="gallery-overlay">
-                        <span>The Dining Room</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&h=600&fit=crop" alt="Chef preparing food" loading="lazy">
-                    <div class="gallery-overlay">
-                        <span>In the Kitchen</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&h=600&fit=crop" alt="Cuban dishes on table" loading="lazy">
-                    <div class="gallery-overlay">
-                        <span>Family Style</span>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=600&h=600&fit=crop" alt="Live music performance" loading="lazy">
-                    <div class="gallery-overlay">
-                        <span>Live Music</span>
-                    </div>
-                </div>
-                <div class="gallery-item gallery-item-tall">
-                    <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=600&h=900&fit=crop" alt="Cocktail being poured" loading="lazy">
-                    <div class="gallery-overlay">
-                        <span>Mojitos</span>
-                    </div>
-                </div>
+                <div class="gallery-item gallery-item-wide"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&h=600&fit=crop" alt="Restaurant interior" loading="lazy"><div class="gallery-overlay"><span>The Dining Room</span></div></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&h=600&fit=crop" alt="Chef preparing food" loading="lazy"><div class="gallery-overlay"><span>In the Kitchen</span></div></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600&h=600&fit=crop" alt="Cuban dishes" loading="lazy"><div class="gallery-overlay"><span>Family Style</span></div></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=600&h=600&fit=crop" alt="Live music" loading="lazy"><div class="gallery-overlay"><span>Live Music</span></div></div>
+                <div class="gallery-item gallery-item-tall"><img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=600&h=900&fit=crop" alt="Mojitos" loading="lazy"><div class="gallery-overlay"><span>Mojitos</span></div></div>
             </div>
         </div>
     </section>
 
-    <!-- TESTIMONIALS -->
+    <!-- REVIEWS -->
     <section id="reviews" class="section section-alt">
         <div class="container">
             <div class="section-header">
                 <span class="section-label">Guest Love</span>
                 <h2>What People Are Saying</h2>
             </div>
-            
             <div class="reviews-grid">
                 <div class="review-card">
                     <div class="review-stars">★★★★★</div>
                     <p class="review-text">"Best Cuban food I've had outside of my grandmother's kitchen. The croquetas are legendary, the mojitos are strong, and the live guiro on Saturdays makes you feel like you're on Calle Ocho."</p>
-                    <div class="review-author">
-                        <span class="author-name">Carlos R.</span>
-                        <span class="author-location">Little Havana</span>
-                    </div>
+                    <div class="review-author"><div class="author-avatar">CR</div><div class="author-meta"><span class="author-name">Carlos R.</span><span class="author-location">Little Havana</span></div></div>
                 </div>
-                
                 <div class="review-card featured">
                     <div class="review-stars">★★★★★</div>
                     <p class="review-text">"We hosted our company retreat here and the whole team was blown away. Carlos and his family made us feel like royalty. The catering package was seamless. This is the real deal — authentic, generous, delicious."</p>
-                    <div class="review-author">
-                        <span class="author-name">Michael T.</span>
-                        <span class="author-location">Brickell</span>
-                    </div>
+                    <div class="review-author"><div class="author-avatar">MT</div><div class="author-meta"><span class="author-name">Michael T.</span><span class="author-location">Brickell</span></div></div>
                 </div>
-                
                 <div class="review-card">
                     <div class="review-stars">★★★★★</div>
                     <p class="review-text">"I take every out-of-town visitor here. The lechón is always perfect fall-off-the-bone tender. Sofia's Cuban coffee after dinner is the best in Miami. This place is a treasure."</p>
-                    <div class="review-author">
-                        <span class="author-name">Maria G.</span>
-                        <span class="author-location">Wynwood</span>
-                    </div>
+                    <div class="review-author"><div class="author-avatar">MG</div><div class="author-meta"><span class="author-name">Maria G.</span><span class="author-location">Wynwood</span></div></div>
                 </div>
             </div>
-            
             <div style="text-align:center;margin-top:var(--space-xl);">
                 <a href="https://yelp.com" class="btn btn-outline" target="_blank">Read all 847 reviews on Yelp →</a>
             </div>
@@ -422,83 +402,40 @@
                     <span class="section-label">Private Events</span>
                     <h2>Bring Taste of Miami to Your Celebration</h2>
                     <p>From office lunches to wedding receptions, we bring authentic Cuban hospitality to your venue. Full catering packages with waitstaff, bartenders, and live music available.</p>
-                    
                     <div class="catering-features">
-                        <div class="catering-feature">
-                            <span class="feature-icon">🍽️</span>
-                            <span>Authentic Cuban spread (20–1000 guests)</span>
-                        </div>
-                        <div class="catering-feature">
-                            <span class="feature-icon">🎵</span>
-                            <span>Live música (trio or full band)</span>
-                        </div>
-                        <div class="catering-feature">
-                            <span class="feature-icon">👨‍🍳</span>
-                            <span>On-site chef + service staff</span>
-                        </div>
-                        <div class="catering-feature">
-                            <span class="feature-icon">📦</span>
-                            <span>Drop-off delivery for corporate orders</span>
-                        </div>
+                        <div class="catering-feature"><span class="feature-icon">🍽️</span><span>Authentic Cuban spread (20–1000 guests)</span></div>
+                        <div class="catering-feature"><span class="feature-icon">🎵</span><span>Live música (trio or full band)</span></div>
+                        <div class="catering-feature"><span class="feature-icon">👨‍🍳</span><span>On-site chef + service staff</span></div>
+                        <div class="catering-feature"><span class="feature-icon">📦</span><span>Drop-off delivery for corporate orders</span></div>
                     </div>
-                    
                     <a href="mailto:catering@tastemiami.com" class="btn btn-primary">Request Catering Info</a>
                 </div>
-                <div class="catering-image">
-                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop" alt="Private dining room setup" loading="lazy">
-                </div>
+                <div class="catering-image"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop" alt="Private dining" loading="lazy"></div>
             </div>
         </div>
     </section>
 
-    <!-- CONTACT / RESERVATIONS -->
+    <!-- CONTACT -->
     <section id="contact" class="section section-dark">
         <div class="container">
             <div class="contact-grid">
                 <div class="contact-info">
                     <h2>Reserve Your Table</h2>
                     <p>Walk-ins welcome, but reservations recommended for parties of 6+. For large parties or private events, please email.</p>
-                    
                     <div class="contact-details">
-                        <div class="contact-item">
-                            <span class="contact-label">📍 Location</span>
-                            <span class="contact-value">1402 SW 8th St<br>Little Havana, Miami, FL 33135</span>
-                        </div>
-                        <div class="contact-item">
-                            <span class="contact-label">🕐 Hours</span>
-                            <span class="contact-value">
-                                Tue–Thu: 11am–10pm<br>
-                                Fri–Sat: 11am–11pm<br>
-                                Sun: 10am–9pm<br>
-                                Mon: Closed
-                            </span>
-                        </div>
-                        <div class="contact-item">
-                            <span class="contact-label">📞 Phone</span>
-                            <a href="tel:+13055550106" class="contact-value phone">(305) 555-0106</a>
-                        </div>
-                        <div class="contact-item">
-                            <span class="contact-label">✉️ Email</span>
-                            <a href="mailto:info@tastemiami.com" class="contact-value">info@tastemiami.com</a>
-                        </div>
+                        <div class="contact-item"><h3>📍 Location</h3><p>1402 SW 8th St<br>Little Havana, Miami, FL 33135</p></div>
+                        <div class="contact-item"><h3>🕐 Hours</h3><p>Tue–Thu: 11am–10pm<br>Fri–Sat: 11am–11pm<br>Sun: 10am–9pm<br>Mon: Closed</p></div>
+                        <div class="contact-item"><h3>📞 Phone</h3><a href="tel:+13055550106">(305) 555-0106</a></div>
+                        <div class="contact-item"><h3>✉️ Email</h3><a href="mailto:info@tastemiami.com">info@tastemiami.com</a></div>
                     </div>
                 </div>
-                
-                <!-- Reservation form placeholder -->
                 <div class="contact-form">
                     <h3>Send us a message</h3>
                     <form>
                         <input type="text" placeholder="Your Name" required>
                         <input type="email" placeholder="Email Address" required>
                         <input type="tel" placeholder="Phone Number">
-                        <select>
-                            <option value="">Reservation size</option>
-                            <option value="2">2 guests</option>
-                            <option value="3-4">3–4 guests</option>
-                            <option value="5-6">5–6 guests</option>
-                            <option value="7-10">7–10 guests</option>
-                            <option value="10+">10+ guests</option>
-                        </select>
+                        <select><option value="">Reservation size</option><option value="2">2 guests</option><option value="3-4">3–4 guests</option><option value="5-6">5–6 guests</option><option value="7-10">7–10 guests</option><option value="10+">10+ guests</option></select>
                         <textarea placeholder="Special requests, event details, etc." rows="3"></textarea>
                         <button type="submit" class="btn btn-primary">Send Message</button>
                     </form>
@@ -507,53 +444,30 @@
         </div>
     </section>
 
+    <!-- Sticky mobile CTA -->
+    <div class="sticky-cta"><a href="tel:+13055550106" style="color: white; font-weight: 700; font-size: 1.1rem;">📞 Reserve Now: (305) 555-0106</a></div>
+
     <!-- FOOTER -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-brand">
-                    <span class="footer-logo">🍽️ Taste of Miami</span>
-                    <p>Three generations of Cuban family recipes. Made with love since 1985.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <a href="#menu">Menu</a>
-                    <a href="#about">Our Story</a>
-                    <a href="#gallery">Gallery</a>
-                    <a href="#catering">Catering</a>
-                </div>
-                <div class="footer-links">
-                    <h4>Connect</h4>
-                    <a href="https://instagram.com" target="_blank">Instagram</a>
-                    <a href="https://facebook.com" target="_blank">Facebook</a>
-                    <a href="https://yelp.com" target="_blank">Yelp</a>
-                    <a href="https://google.com/maps" target="_blank">Google Reviews</a>
-                </div>
-                <div class="footer-contact">
-                    <h4>Contact</h4>
-                    <p>1402 SW 8th St<br>Little Havana, Miami, FL 33135</p>
-                    <p><a href="tel:+13055550106">(305) 555-0106</a></p>
-                </div>
+                <div class="footer-brand"><span class="footer-logo">🍽️ Taste of Miami</span><p>Three generations of Cuban family recipes. Made with love since 1985.</p></div>
+                <div class="footer-links"><h4>Quick Links</h4><a href="#menu">Menu</a><a href="#about">Our Story</a><a href="#gallery">Gallery</a><a href="#catering">Catering</a></div>
+                <div class="footer-links"><h4>Connect</h4><a href="https://instagram.com" target="_blank">Instagram</a><a href="https://facebook.com" target="_blank">Facebook</a><a href="https://yelp.com" target="_blank">Yelp</a><a href="https://google.com/maps" target="_blank">Google Reviews</a></div>
+                <div class="footer-contact"><h4>Contact</h4><p>1402 SW 8th St<br>Little Havana, Miami, FL 33135</p><p><a href="tel:+13055550106">(305) 555-0106</a></p></div>
             </div>
-            <div class="footer-bottom">
-                <p>© 2026 Taste of Miami. Made with ❤️ in Little Havana.</p>
-            </div>
+            <div class="footer-bottom"><p>© 2026 Taste of Miami. Made with ❤️ in Little Havana.</p></div>
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
-        // Mobile menu toggle
         const navToggle = document.querySelector('.nav-toggle');
         const mobileMenu = document.querySelector('.mobile-menu');
         const mobileMenuClose = document.querySelector('.mobile-menu-close');
         const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-        
         navToggle?.addEventListener('click', () => mobileMenu.classList.add('mobile-menu-open'));
         mobileMenuClose?.addEventListener('click', () => mobileMenu.classList.remove('mobile-menu-open'));
         mobileNavLinks.forEach(link => link.addEventListener('click', () => mobileMenu.classList.remove('mobile-menu-open')));
-        
-        // Smooth anchor scrolling for older browsers
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
